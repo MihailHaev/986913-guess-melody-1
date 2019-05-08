@@ -41,13 +41,13 @@ it(`Start in game currectly works`, () => {
     questions={questions}
   />);
 
-  expect(app.state(`question`)).toEqual(-1);
+  expect(app.state(`numberOfActiveQuestion`)).toEqual(-1);
 
   const button = app.find(`button`);
   button.simulate(`click`);
   app.update();
 
-  expect(app.state(`question`)).toEqual(0);
+  expect(app.state(`numberOfActiveQuestion`)).toEqual(0);
 });
 
 it(`Question answer switches to another question`, () => {
@@ -59,7 +59,7 @@ it(`Question answer switches to another question`, () => {
   />);
 
   app.setState({
-    question: 0,
+    numberOfActiveQuestion: 0,
   });
   app.update();
 
@@ -68,7 +68,7 @@ it(`Question answer switches to another question`, () => {
     preventDefault() {},
   });
 
-  expect(app.state(`question`)).toEqual(1);
+  expect(app.state(`numberOfActiveQuestion`)).toEqual(1);
 });
 
 it(`last answer switches to start game`, () => {
@@ -79,7 +79,7 @@ it(`last answer switches to start game`, () => {
     questions={questions}
   />);
   app.setState({
-    question: questions.length - 1
+    numberOfActiveQuestion: questions.length - 1
   });
   app.update();
 
@@ -88,5 +88,5 @@ it(`last answer switches to start game`, () => {
     preventDefault() {},
   });
 
-  expect(app.state(`question`)).toEqual(-1);
+  expect(app.state(`numberOfActiveQuestion`)).toEqual(-1);
 });

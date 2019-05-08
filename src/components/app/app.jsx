@@ -12,32 +12,14 @@ const Type = {
 class App extends PureComponent {
   constructor() {
     super();
-
     this.state = {
-      question: -1,
+      numberOfActiveQuestion: -1,
     };
   }
-  _getScreen(question, onClick) {
-    if (!question) {
-      const {errorCount, gameTime} = this.props;
-      return <WelcomeScreen
-        errorCount={errorCount}
-        gameTime={gameTime}
-        onClick={onClick}
-      />;
-    }
-    switch (question.type) {
-      case `genre`: return <GenreQuestionScreen question={question} onAnswer={onClick}/>;
-      case `artist`: {
-        return <ArtistQuestionScreen question={question} onAnswer={onClick}/>;
-      }
-    }
 
-    return null;
-  }
   render() {
     const {questions} = this.props;
-    const {question} = this.state;
+    const {numberOfActiveQuestion} = this.state;
     return <section className={`game ${Type.ARTIST}`}>
       <header className="game__header">
         <a className="game__back" href="#">
@@ -68,14 +50,33 @@ class App extends PureComponent {
         </div>
       </header>
 
-      {this._getScreen(questions[question], () => {
+      {this._getScreen(questions[numberOfActiveQuestion], () => {
         this.setState({
-          question: question + 1 >= questions.length
+          numberOfActiveQuestion: numberOfActiveQuestion + 1 >= questions.length
             ? -1
-            : question + 1,
+            : numberOfActiveQuestion + 1,
         });
       })}
     </section>;
+  }
+
+  _getScreen(question, onClick) {
+    if (!question) {
+      const {errorCount, gameTime} = this.props;
+      return <WelcomeScreen
+        errorCount={errorCount}
+        gameTime={gameTime}
+        onClick={onClick}
+      />;
+    }
+    switch (question.type) {
+      case `genre`: return <GenreQuestionScreen question={question} onAnswer={onClick}/>;
+      case `artist`: {
+        return <ArtistQuestionScreen question={question} onAnswer={onClick}/>;
+      }
+    }
+
+    return null;
   }
 }
 
