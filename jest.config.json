@@ -1,0 +1,9 @@
+{
+	"setupFiles": [
+        "<rootDir>test-setup.js"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts)$": "babel-jest"
+    },
+    "testURL": "http://localhost/"
+  }
