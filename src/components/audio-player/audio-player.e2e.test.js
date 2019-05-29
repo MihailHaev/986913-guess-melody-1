@@ -19,7 +19,7 @@ it(`button play in audio player not currently works`, () => {
 
   const button = audioPlayer.find(`.track__button`);
   button.simulate(`click`, {
-    preventDefault() {},
+    preventDefault: audioPlayer.setState({isPlaying: !audioPlayer.state(`isPlaying`)}),
   });
   audioPlayer.update();
 
@@ -38,7 +38,7 @@ it(`button stop in audio player not currently works`, () => {
   expect(audioPlayer.state(`isPlaying`)).toEqual(true);
   const button = audioPlayer.find(`.track__button`);
   button.simulate(`click`, {
-    preventDefault() {},
+    preventDefault: audioPlayer.setState({isPlaying: !audioPlayer.state(`isPlaying`)}),
   });
   audioPlayer.update();
 
