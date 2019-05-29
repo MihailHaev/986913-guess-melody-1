@@ -10,7 +10,7 @@ const init = (gameQuestions) => {
       <App
         errorCount={settings.errorCount}
         gameTime={settings.gameTime}
-        gameQuestions={gameQuestions}
+        questions={gameQuestions}
       />,
       document.querySelector(`.main`)
   );

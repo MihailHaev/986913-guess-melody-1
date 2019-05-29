@@ -33,7 +33,11 @@ it(`Genre Question Screen correctly renders`, () => {
     .create(<GenreQuestionScreen
       question={question}
       onAnswer={jest.fn()}
-    />)
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();
